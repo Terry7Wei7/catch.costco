@@ -20,7 +20,8 @@ urllib3.disable_warnings()
 #ssl證書
 os.environ['WDM_SSL_VERIFY']='0'
 if __name__ == '__main__':
-    scroll_time = 2
+    #可調整頁面滾動次數
+    scroll_time = 5
     driver = webdriver.Chrome()
     # 最大化視窗
     driver.maximize_window()
