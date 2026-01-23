@@ -17,12 +17,12 @@ import ssl
 import urllib3
 from time import sleep
 urllib3.disable_warnings()
-#ssl證書
+#ssl
 os.environ['WDM_SSL_VERIFY']='0'
 if __name__ == '__main__':
     scroll_time = 2
     driver = webdriver.Chrome()
-    # 最大化視窗
+    # max window
     driver.maximize_window()
     driver.get('https://www.facebook.com/groups/1260448967306807')
     sleep(1)
@@ -38,13 +38,13 @@ if __name__ == '__main__':
             current_position = driver.execute_script('return window.pageYOffset')
             sleep(1)  # It is necessary here to give it some time to load the content
 root = BeautifulSoup(driver.page_source, "html.parser")
-# 定位文章標題
+# locate page title
 titles = root.find_all(
     "div", class_="x1iorvi4 x1pi30zi x1swvt13 x1l90r2v")
 for title in titles:
-    # 定位每一行標題
+    # Position each line header
     posts = title.find_all("div", dir="auto")
-    # 如果有文章標題才印出
+    # Only print if there is an article title
     if len(posts) != 0:
         for post in posts: 
             file = open("Costco_Get_title.txt", "a", encoding="utf-8")
@@ -54,13 +54,13 @@ for title in titles:
     print("-" * 30)
     #file.write("-" * 30+"\n")
     #file.close()
-# 定位文章留言
+# Positioning Article Comments
 messages = root.find_all(
     "div", class_="x1y1aw1k xn6708d xwib8y2 x1ye3gou")
 for message in messages:
-    # 定位每一行標題
+    # Position each line header
     posts = message.find_all("div", dir="auto")
-    # 如果有文章留言才印出
+    # Only print if there are comments on the article
     if len(posts) != 0:
         for post in posts:
             file = open("Costco_Get_message.txt", "a", encoding="utf-8")
@@ -69,10 +69,10 @@ for message in messages:
     print("-" * 30)
     file.write("-" * 30+"\n")
     #file.close()
-# 建立資料夾
+# Create a folder
 if not os.path.exists("images"):
     os.mkdir("images")
-# 下載圖片
+# Download Images
 images = root.find_all(
     "img", class_=["x1ey2m1c xds687c x5yr21d x10l6tqk x17qophe x13vifvy xh8yej3 xl1xv1r"])
 if len(images) != 0:
@@ -81,7 +81,8 @@ if len(images) != 0:
         with open(f"images/img{index+1}.jpg", "wb") as file:
             file.write(img.content)
         print(f"第 {index+1} 張圖片下載完成!")
-# 等待5秒
+# Wait 5 seconds
 time.sleep(5)
-# 關閉瀏覽器
+# Close your browser
 #driver.quit()
+
